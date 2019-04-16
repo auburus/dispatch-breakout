@@ -110,44 +110,52 @@ def fetch_word(link, p, l, w):
 
 
 def find_word(story, par, line, word):
-    found = False
+
+    words = []
     for story_name, link in data.items():
         if story.lower() == initials(story_name):
-            print(story_name, '=>', fetch_word(link, par, line, word))
-            found = True
+            words.append(fetch_word(link, par, line, word))
 
-    if not found:
-        print('('+story+','+str(par)+','+str(line)+','+str(word)+') => NOT FOUND')
+    if not words:
+        print('ERROR: Book', story, 'not found')
+        return
+
+    print('(' + ','.join(map(str, [story,par,line, word])) + ')', '=>', '|'.join(words))
 
 def find_words(words):
     for (story, par, line, word) in words:
         find_word(story, par, line, word)
 
-find_words([('asis', 1,1,7)
-           ,('tgs', 18,1,26)
-           ,('acoi', 21,1,10)
-           ,('tgs', 1,2,15)
-           ,('tmwttl', 7,3,3)
-           ,('taobp',3,6,13)
-           ,('asis', 1,1,5)
-           ,('tbvm', 6,2,4)
-           ,('taotnb', 7,1,2)
-           ,('asib', 1,1,1)
-           ,('tmwttl',3,3,2)
-           ,('trl', 61,6,12)
-           ,('asib',5,1,3)
-           ,('tmwttl', 1,4,15)
-           ,('acoi',11,5,2)
-           ,('tmwttl', 1,3,24)
-           ,('tsotf', 2,1,13)
-           ,('asis', 1,1,5)
-           ,('tbvm', 1,2,2)
-           ,('sb', 1,1,3)
-           ,('acoi',1,1,14)
-           ,('thotb', 17,2,24)
-           ,('tmwttl', 13,6,9)
-           ,('tmwttl',33,1,19)
-           ,('asib',5,1,3)
-           ,('acoi',1,3,10)
-           ,('tgs',21,4,14)
-           ])
+
+def main():
+    find_words([('asis', 1,1,7)
+               ,('tgs', 18,1,26)
+               ,('acoi', 21,1,10)
+               ,('tgs', 1,2,15)
+               ,('tmwttl', 7,3,3)
+               ,('taobp',3,6,13)
+               ,('asis', 1,1,5)
+               ,('tbvm', 6,2,4)
+               ,('taotnb', 7,1,2)
+               ,('asib', 1,1,1)
+               ,('tmwttl',3,3,2)
+               ,('trl', 61,6,12)
+               ,('asib',5,1,3)
+               ,('tmwttl', 1,4,15)
+               ,('acoi',11,5,2)
+               ,('tmwttl', 1,3,24)
+               ,('tsotf', 2,1,13)
+               ,('asis', 1,1,5)
+               ,('tbvm', 1,2,2)
+               ,('sb', 1,1,3)
+               ,('acoi',1,1,14)
+               ,('thotb', 17,2,24)
+               ,('tmwttl', 13,6,9)
+               ,('tmwttl',33,1,19)
+               ,('asib',5,1,3)
+               ,('acoi',1,3,10)
+               ,('tgs',21,4,14)
+               ])
+
+if __name__ == "__main__":
+    main()
